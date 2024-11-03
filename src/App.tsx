@@ -5,7 +5,9 @@ import Filtros from "./components/Filtros.tsx";
 function App() {
   return (
     <div className="w-full h-full">
+      {/* Barra superior de navegación */}
       <div className="w-full bg-[#005E90] px-6 flex justify-between items-center">
+        {/* Opciones de accesibilidad y cambio de idioma */}
         <div>
           <ul className="flex items-center gap-5 font-bold text-[11px] font-mont">
             <li className=" text-white text-opacity-65 cursor-pointer flex items-center">
@@ -29,6 +31,7 @@ function App() {
           </ul>
         </div>
 
+        {/* Menú principal con botones de "Sitios de interés", "Información para", y otros */}
         <div>
           <ul className="flex items-center font-bold text-[11px] font-mont">
             <li className="flex items-center text-white text-opacity-65 p-[10px] hover:text-opacity-100 cursor-pointer transition duration-200">
@@ -79,6 +82,7 @@ function App() {
                 />
               </svg>
             </li>
+            {/*Botones de la barra de navegación */}
             <li className="p-[10px]">
               {" "}
               <button className="bg-[#19B5F7] py-[2px] px-[8px] text-white rounded-[4px] border-none">
@@ -95,15 +99,19 @@ function App() {
         </div>
       </div>
 
+      {/* Encabezado principal con imagen de fondo */}
       <div className="w-full relative">
         <img
           src="https://usm.cl/wp-content/uploads/2021/04/banner-eventos.jpg"
           alt=""
         />
+        {/* Overlay para oscurecer la imagen de fondo */}
         <div className="absolute top-0 left-0 bg-black bg-opacity-55 w-full h-full"></div>
 
+        {/* Contenido sobre la imagen de fondo (título y botón) */}
         <div className="w-full h-full absolute left-0 top-0 px-10 py-5">
           <div className="w-full h-full flex flex-col justify-between">
+            {/* Logo de la universidad y menú secundario */}
             <div className="w-full flex justify-between items-center">
               <img className="w-64" src="logo-usm.svg" alt="" />
               <ul className="flex gap-4 font-mont text-white text-[14px] font-semibold">
@@ -185,6 +193,7 @@ function App() {
               </ul>
             </div>
 
+            {/* Título y botón de publicar evento */}
             <div className="flex justify-between align-middle">
               <h1 className="border-l-4 border-yellow-500 pl-[30px] text-white font-mont font-bold text-[32px] self-center text-center">
                 Eventos
@@ -198,19 +207,27 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Contenido principal dividido en filtros (izquierda) y eventos (derecha) */}
       <div className="w-full flex">
+        {/* Columna izquierda: Filtros */}
         <div className="w-1/6 bg-gray-300">
           <Filtros />
         </div>
+        {/* Columna derecha: Lista de eventos */}
         <div className="w-5/6 px-8 py-6 flex flex-col gap-6">
+          {/* Sección de eventos de septiembre */}
           <div className="flex flex-col items-center w-full gap-6">
             <div className="w-full flex">
               <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
                 Septiembre
               </h2>
             </div>
+
+            {/* Tarjeta del evento "Muestra costumbrista 2024" */}
             <div className="w-full px-8">
               <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
+                {/* Columna con la fecha */}
                 <div className="w-1/5 flex flex-col h-full">
                   <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
                     <p>Viernes</p>
@@ -219,6 +236,7 @@ function App() {
                     <p className="text-7xl self-center">17</p>
                   </div>
                 </div>
+                {/* Imagen del evento */}
                 <div className="w-1/5 h-full">
                   <img
                     className="w-full h-full object-cover"
@@ -226,6 +244,7 @@ function App() {
                     alt=""
                   />
                 </div>
+                {/* Detalles del evento */}
                 <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
                   <div className="w-full">
                     <h3 className="text-left font-mont text-xl font-semibold">
@@ -249,14 +268,17 @@ function App() {
             </div>
           </div>
 
+          {/* Sección de eventos de octubre */}
           <div className="flex flex-col items-center w-full gap-6">
             <div className="w-full flex">
               <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
                 Octubre
               </h2>
             </div>
+            {/* Primer evento de octubre: Ferias laborales 2024 */}
             <div className="w-full px-8">
               <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
+                {/* Columna con la fecha */}
                 <div className="w-1/5 flex flex-col h-full">
                   <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
                     <p>Martes</p>
@@ -265,6 +287,7 @@ function App() {
                     <p className="text-7xl self-center">1</p>
                   </div>
                 </div>
+                {/* Imagen del evento */}
                 <div className="w-1/5 h-full">
                   <img
                     className="w-full h-full object-cover"
@@ -272,6 +295,7 @@ function App() {
                     alt=""
                   />
                 </div>
+                {/* Detalles del evento */}
                 <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
                   <div className="w-full">
                     <h3 className="text-left font-mont text-xl font-semibold">
@@ -293,8 +317,11 @@ function App() {
                 </div>
               </div>
             </div>
+
+            {/* Segundo evento de octubre: Encuentro Alumni USM */}
             <div className="w-full px-8">
               <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
+                {/* Columna con la fecha */}
                 <div className="w-1/5 flex flex-col h-full">
                   <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
                     <p>Viernes</p>
@@ -303,6 +330,7 @@ function App() {
                     <p className="text-7xl self-center">11</p>
                   </div>
                 </div>
+                {/* Imagen del evento */}
                 <div className="w-1/5 h-full">
                   <img
                     className="w-full h-full object-cover"
@@ -310,6 +338,7 @@ function App() {
                     alt=""
                   />
                 </div>
+                {/* Detalles del evento */}
                 <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
                   <div className="w-full">
                     <h3 className="text-left font-mont text-xl font-semibold">
@@ -336,6 +365,7 @@ function App() {
             </div>
           </div>
 
+          {/* Botón para ver más eventos */}
           <div className="py-2 px-8 flex justify-end">
             <button className="bg-sky-500 px-6 py-2 text-white font-bold font-mont self-center rounded-sm self-end">
               Ver más eventos
