@@ -2,6 +2,54 @@ import "./App.css";
 import "./components/Filtros.tsx";
 import Filtros from "./components/Filtros.tsx";
 
+type Evento = {
+  dia: number;
+  diaSemana: string;
+  titulo: string;
+  modalidad: string;
+  modalidadColor: string;
+  imagen: string;
+  subModalidad?: string;
+  subModalidadColor?: string;
+};
+
+type EventosPorMes = {
+  [mes: string]: Evento[];
+};
+
+const eventosPorMes: EventosPorMes = {
+  Septiembre: [
+    {
+      dia: 17,
+      diaSemana: "Viernes",
+      titulo: "Muestra costumbrista 2024",
+      modalidad: "Presencial",
+      modalidadColor: "#005E90",
+      imagen: "/evento_costumbrista.png",
+    },
+  ],
+  Octubre: [
+    {
+      dia: 1,
+      diaSemana: "Martes",
+      titulo: "Ferias laborales 2024",
+      modalidad: "Online",
+      modalidadColor: "#005E90",
+      imagen: "/evento_ferialab.png",
+    },
+    {
+      dia: 11,
+      diaSemana: "Viernes",
+      titulo: "Encuentro Alumni USM",
+      modalidad: "Sede Viña",
+      modalidadColor: "bg-emerald-600",
+      subModalidad: "Presencial",
+      subModalidadColor: "#005E90",
+      imagen: "/evento_encuentroalumno.png",
+    },
+  ],
+};
+
 function App() {
   return (
     <div className="w-full h-full">
@@ -216,158 +264,82 @@ function App() {
         </div>
         {/* Columna derecha: Lista de eventos */}
         <div className="w-5/6 px-8 py-6 flex flex-col gap-6">
-          {/* Sección de eventos de septiembre */}
-          <div className="flex flex-col items-center w-full gap-6">
-            <div className="w-full flex">
-              <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
-                Septiembre
-              </h2>
-            </div>
+          {/* Eventos por mes */}
+          {Object.keys(eventosPorMes).map((mes) => (
+            <div key={mes} className="flex flex-col items-center w-full gap-6">
+              {/* Título del mes */}
+              <div className="w-full flex">
+                <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
+                  {mes}
+                </h2>
+              </div>
 
-            {/* Tarjeta del evento "Muestra costumbrista 2024" */}
-            <div className="w-full px-8">
-              <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
-                {/* Columna con la fecha */}
-                <div className="w-1/5 flex flex-col h-full">
-                  <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
-                    <p>Viernes</p>
-                  </div>
-                  <div className="h-full w-full flex justify-center">
-                    <p className="text-7xl self-center">17</p>
-                  </div>
-                </div>
-                {/* Imagen del evento */}
-                <div className="w-1/5 h-full">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="/evento_costumbrista.png"
-                    alt=""
-                  />
-                </div>
-                {/* Detalles del evento */}
-                <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
-                  <div className="w-full">
-                    <h3 className="text-left font-mont text-xl font-semibold">
-                      Muestra costumbrista 2024
-                    </h3>
-                  </div>
-                  <div className="flex items-center p-2 gap-2">
-                    <button className="bg-[#005E90] py-[2px] px-[18px] rounded-md text-white font-medium">
-                      Presencial
-                    </button>
-                  </div>
-                  <div className="w-full h-full flex justify-end items-end">
-                    <div className="py-4">
-                      <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont self-center rounded-sm">
-                        Ver detalles
-                      </button>
+              {/* Eventos del mes */}
+              {eventosPorMes[mes].map((evento, index) => (
+                <div key={index} className="w-full px-8">
+                  <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
+                    {/* Columna con la fecha */}
+                    <div className="w-1/5 flex flex-col h-full">
+                      <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
+                        <p>{evento.diaSemana}</p>
+                      </div>
+                      <div className="h-full w-full flex justify-center">
+                        <p className="text-7xl self-center">{evento.dia}</p>
+                      </div>
+                    </div>
+
+                    {/* Imagen del evento */}
+                    <div className="w-1/5 h-full">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={evento.imagen}
+                        alt={evento.titulo}
+                      />
+                    </div>
+
+                    {/* Detalles del evento */}
+                    <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
+                      <div className="w-full">
+                        <h3 className="text-left font-mont text-xl font-semibold">
+                          {evento.titulo}
+                        </h3>
+                      </div>
+                      <div className="flex items-center p-2 gap-2">
+                        <button
+                          className={`py-[2px] px-[18px] rounded-md text-white font-medium`}
+                          style={{ backgroundColor: evento.modalidadColor }}
+                        >
+                          {evento.modalidad}
+                        </button>
+                        {/* Submodalidad en caso de que exista */}
+                        {evento.subModalidad && (
+                          <button
+                            className="py-[2px] px-[18px] rounded-md text-white font-medium"
+                            style={{
+                              backgroundColor: evento.subModalidadColor,
+                            }}
+                          >
+                            {evento.subModalidad}
+                          </button>
+                        )}
+                      </div>
+                      <div className="w-full h-full flex justify-end items-end">
+                        <div className="py-4">
+                          <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont self-center rounded-sm">
+                            Ver detalles
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          </div>
-
-          {/* Sección de eventos de octubre */}
-          <div className="flex flex-col items-center w-full gap-6">
-            <div className="w-full flex">
-              <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
-                Octubre
-              </h2>
-            </div>
-            {/* Primer evento de octubre: Ferias laborales 2024 */}
-            <div className="w-full px-8">
-              <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
-                {/* Columna con la fecha */}
-                <div className="w-1/5 flex flex-col h-full">
-                  <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
-                    <p>Martes</p>
-                  </div>
-                  <div className="h-full w-full flex justify-center">
-                    <p className="text-7xl self-center">1</p>
-                  </div>
-                </div>
-                {/* Imagen del evento */}
-                <div className="w-1/5 h-full">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="/evento_ferialab.png"
-                    alt=""
-                  />
-                </div>
-                {/* Detalles del evento */}
-                <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
-                  <div className="w-full">
-                    <h3 className="text-left font-mont text-xl font-semibold">
-                      Ferias laborales 2024
-                    </h3>
-                  </div>
-                  <div className="flex items-center p-2 gap-2">
-                    <button className="bg-[#005E90] py-[2px] px-[18px] rounded-md text-white font-medium">
-                      Online
-                    </button>
-                  </div>
-                  <div className="w-full h-full flex justify-end items-end">
-                    <div className="py-4">
-                      <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont self-center rounded-sm">
-                        Ver detalles
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Segundo evento de octubre: Encuentro Alumni USM */}
-            <div className="w-full px-8">
-              <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
-                {/* Columna con la fecha */}
-                <div className="w-1/5 flex flex-col h-full">
-                  <div className="border-b-2 border-gray-400 border-opacity-30 py-3 text-gray-500 text-lg font-bold">
-                    <p>Viernes</p>
-                  </div>
-                  <div className="h-full w-full flex justify-center">
-                    <p className="text-7xl self-center">11</p>
-                  </div>
-                </div>
-                {/* Imagen del evento */}
-                <div className="w-1/5 h-full">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="/evento_encuentroalumno.png"
-                    alt=""
-                  />
-                </div>
-                {/* Detalles del evento */}
-                <div className="w-3/5 h-full py-3 px-5 flex flex-col gap-5">
-                  <div className="w-full">
-                    <h3 className="text-left font-mont text-xl font-semibold">
-                      Encuentro Alumni USM
-                    </h3>
-                  </div>
-                  <div className="flex items-center p-2 gap-2">
-                    <button className="bg-emerald-600 py-[2px] px-[18px] rounded-md text-white font-medium">
-                      Sede Viña
-                    </button>
-                    <button className="bg-[#005E90] py-[2px] px-[18px] rounded-md text-white font-medium">
-                      Presencial
-                    </button>
-                  </div>
-                  <div className="w-full h-full flex justify-end items-end">
-                    <div className="py-4">
-                      <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont self-center rounded-sm">
-                        Ver detalles
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
 
           {/* Botón para ver más eventos */}
           <div className="py-2 px-8 flex justify-end">
-            <button className="bg-sky-500 px-6 py-2 text-white font-bold font-mont self-center rounded-sm self-end">
+            <button className="bg-sky-500 px-6 py-2 text-white font-bold font-mont rounded-sm self-end">
               Ver más eventos
             </button>
           </div>
