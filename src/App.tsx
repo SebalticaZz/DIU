@@ -1,4 +1,6 @@
 import './App.css'
+import './components/Filtros.tsx'
+import Filtros from './components/Filtros.tsx'
 
 function App() {
 
@@ -100,7 +102,9 @@ function App() {
 
       </div>
       <div className='w-full h-[60vh] flex'>
-        <div className='w-1/4 bg-gray-300 h-full'></div>
+        <div className='w-1/4 bg-gray-300 h-full'>
+          <Filtros />
+        </div>
         <div className='w-3/4 h-full'></div>
       </div>
     </div>
