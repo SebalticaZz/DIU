@@ -48,6 +48,41 @@ const eventosPorMes: EventosPorMes = {
       imagen: "/evento_encuentroalumno.png",
     },
   ],
+  Noviembre: [
+    {
+      dia: 12,
+      diaSemana: "Martes",
+      titulo: "Concurso «Mi tesis en 180 segundos»",
+      modalidad: "Presencial",
+      modalidadColor: "#005E90",
+      imagen: "/tesis180.png",
+      // tematica: investigacion
+      // publico: abierto
+      // campus san joaquin
+    },
+    {
+      dia: 15,
+      diaSemana: "Viernes",
+      titulo: "32ª Feria de Software USM",
+      modalidad: "Presencial",
+      modalidadColor: "#005E90",
+      imagen: "/feria_software.png",
+      // tematica: docencia
+      // publico: abierto
+      // 3 campus, san joaquin, viña y concepcion
+    },
+    {
+      dia: 23,
+      diaSemana: "Sábado",
+      titulo: "Encuentro Alumni 2024 Departamento de Informática",
+      modalidad: "Presencial",
+      modalidadColor: "#005E90",
+      imagen: "/alumni_informatica.png",
+      // tematica: vinculación con el medio
+      // publico: ex-alumnos
+      // Campus Casa Central Valparaíso
+    }
+  ]
 };
 
 function App() {

@@ -57,8 +57,9 @@ const Filtros: React.FC = () => {
           className="p-2 border border-black rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option>Modalidad</option>
-          <option>Online</option>
           <option>Presencial</option>
+          <option>Online</option>
+          <option>Mixta</option>
         </select>
         <select
           value={campus}
@@ -66,11 +67,12 @@ const Filtros: React.FC = () => {
           className="p-2 border border-black rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option>Campus</option>
-          <option>Casa Central Valparaíso</option>
+          <option>Campus Casa Central Valparaíso</option>
           <option>San Joaquín</option>
           <option>Vitacura</option>
           <option>Viña del Mar</option>
           <option>Concepción</option>
+          <option>Otro</option>
         </select>
         <select
           value={tematica}
@@ -78,7 +80,11 @@ const Filtros: React.FC = () => {
           className="p-2 border border-black rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option>Temática</option>
-          <option>Arte y Cultura</option>
+          <option>Cultura, Arte y Recreación</option>
+          <option>Vinculación con el Medio</option>
+          <option>Investigación</option>
+          <option>Docencia</option>
+          <option>Innovación</option>
         </select>
         <select
           value={publico}
