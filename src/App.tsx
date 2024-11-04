@@ -1,20 +1,35 @@
 import "./App.css";
 import "./components/Filtros.tsx";
 import Filtros from "./components/Filtros.tsx";
+import { useState } from "react";
 
 type Evento = {
   dia: number;
   diaSemana: string;
   titulo: string;
   modalidad: string;
-  modalidadColor: string;
   imagen: string;
-  subModalidad?: string;
-  subModalidadColor?: string;
+  campus: string[];
+  tematica?: string;
+  tematicaColor?: string;
+  publico?: string;
+  publicoColor?: string;
 };
 
 type EventosPorMes = {
   [mes: string]: Evento[];
+};
+
+const colores = {
+  colorCampus : "#00815C",
+  colorModalidad : "#005E90",
+}
+
+const formatearCampus = (campusList: string[]) => {
+  if (campusList.length === 1) return campusList[0];
+  const campusListCopy = [...campusList];
+  const ultimaSede = campusListCopy.pop();
+  return `${campusListCopy.join(", ")} y ${ultimaSede}`;
 };
 
 const eventosPorMes: EventosPorMes = {
@@ -24,7 +39,11 @@ const eventosPorMes: EventosPorMes = {
       diaSemana: "Viernes",
       titulo: "Muestra costumbrista 2024",
       modalidad: "Presencial",
-      modalidadColor: "#005E90",
+      campus: ["San Joaquín"],
+      tematica: "Cultura, Arte y Recreación",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
       imagen: "/evento_costumbrista.png",
     },
   ],
@@ -34,17 +53,23 @@ const eventosPorMes: EventosPorMes = {
       diaSemana: "Martes",
       titulo: "Ferias laborales 2024",
       modalidad: "Online",
-      modalidadColor: "#005E90",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
       imagen: "/evento_ferialab.png",
     },
     {
       dia: 11,
       diaSemana: "Viernes",
       titulo: "Encuentro Alumni USM",
-      modalidad: "Sede Viña",
-      modalidadColor: "bg-emerald-600",
-      subModalidad: "Presencial",
-      subModalidadColor: "#005E90",
+      modalidad: "Presencial",
+      campus: ["Viña del Mar"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Ex-Alumnos",
+      publicoColor: "#005E90",
       imagen: "/evento_encuentroalumno.png",
     },
   ],
@@ -54,38 +79,83 @@ const eventosPorMes: EventosPorMes = {
       diaSemana: "Martes",
       titulo: "Concurso «Mi tesis en 180 segundos»",
       modalidad: "Presencial",
-      modalidadColor: "#005E90",
+      campus: ["San Joaquín"],
+      tematica: "Investigación",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
       imagen: "/tesis180.png",
-      // tematica: investigacion
-      // publico: abierto
-      // campus san joaquin
     },
     {
       dia: 15,
       diaSemana: "Viernes",
       titulo: "32ª Feria de Software USM",
       modalidad: "Presencial",
-      modalidadColor: "#005E90",
+      campus: ["San Joaquín", "Viña del Mar", "Casa Central Valparaíso"],
+      tematica: "Docencia",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
       imagen: "/feria_software.png",
-      // tematica: docencia
-      // publico: abierto
-      // 3 campus, san joaquin, viña y concepcion
     },
     {
       dia: 23,
       diaSemana: "Sábado",
       titulo: "Encuentro Alumni 2024 Departamento de Informática",
       modalidad: "Presencial",
-      modalidadColor: "#005E90",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Ex-Alumnos",
+      publicoColor: "#005E90",
       imagen: "/alumni_informatica.png",
-      // tematica: vinculación con el medio
-      // publico: ex-alumnos
-      // Campus Casa Central Valparaíso
     }
   ]
 };
 
 function App() {
+
+  // Estados para los filtros
+  const [mes, setMes] = useState<string>("");
+  const [modalidad, setModalidad] = useState<string>("");
+  const [campus, setCampus] = useState<string>("");
+  const [tematica, setTematica] = useState<string>("");
+  const [publico, setPublico] = useState<string>("");
+
+  const filtrarEventos = () => {
+    const mesesFiltrados: EventosPorMes = {};
+
+    Object.keys(eventosPorMes).forEach((mesKey) => {
+      const eventosFiltrados = eventosPorMes[mesKey].filter((evento) => {
+        return (
+          (mes ? mesKey === mes : true) &&
+          (modalidad ? evento.modalidad === modalidad : true) &&
+          (campus === "Varios" ? evento.campus.length > 1 : campus ? evento.campus.includes(campus) : true) &&
+          (tematica ? evento.tematica === tematica : true) &&
+          (publico ? evento.publico === publico : true)
+        );
+      });
+
+      if (eventosFiltrados.length > 0) {
+        mesesFiltrados[mesKey] = eventosFiltrados;
+      }
+    });
+
+    return mesesFiltrados;
+  };
+
+  // Filtrar eventos según los filtros seleccionados
+  const eventosFiltrados = filtrarEventos();
+
+  // Función para limpiar los filtros
+  const limpiarFiltros = () => {
+    setMes("");
+    setModalidad("");
+    setCampus("");
+    setTematica("");
+    setPublico("");
+  };
+  
   return (
     <div className="w-full h-full">
       {/* Barra superior de navegación */}
@@ -294,23 +364,40 @@ function App() {
       {/* Contenido principal dividido en filtros (izquierda) y eventos (derecha) */}
       <div className="w-full flex">
         {/* Columna izquierda: Filtros */}
-        <div className="w-1/6 bg-gray-300">
-          <Filtros />
+        <div className="w-1/6 bg-gray-300 p-4 flex flex-col gap-6 sticky top-0 h-screen">
+
+          {/* Componentes de filtros */}
+          <Filtros
+            mes={mes}
+            setMes={setMes}
+            modalidad={modalidad}
+            setModalidad={setModalidad}
+            campus={campus}
+            setCampus={setCampus}
+            tematica={tematica}
+            setTematica={setTematica}
+            publico={publico}
+            setPublico={setPublico}
+          />
+          
+          <button onClick={limpiarFiltros} className="bg-red-500 text-white px-4 py-2 rounded w-3/4 mx-auto">
+            Limpiar filtros
+          </button>
         </div>
-        {/* Columna derecha: Lista de eventos */}
-        <div className="w-5/6 px-8 py-6 flex flex-col gap-6">
-          {/* Eventos por mes */}
-          {Object.keys(eventosPorMes).map((mes) => (
-            <div key={mes} className="flex flex-col items-center w-full gap-6">
+
+        {/* Contenedor de eventos filtrados */}
+        <div className="w-4/5 px-8 py-6 flex flex-col gap-6">
+          {Object.keys(eventosFiltrados).map((mesKey) => (
+            <div key={mesKey} className="flex flex-col items-center w-full gap-6">
               {/* Título del mes */}
               <div className="w-full flex">
-                <h2 className="border-l-4 border-[#E5B300] font-sans text-2xl font-semibold pl-2">
-                  {mes}
+                <h2 className="border-l-4 border-[#E5B300] font-sans text-3xl font-semibold pl-3">
+                  {mesKey}
                 </h2>
               </div>
 
-              {/* Eventos del mes */}
-              {eventosPorMes[mes].map((evento, index) => (
+              {/* Lista de eventos del mes */}
+              {eventosFiltrados[mesKey].map((evento, index) => (
                 <div key={index} className="w-full px-8">
                   <div className="w-full h-52 border-gray-400 border-2 border-opacity-30 flex">
                     {/* Columna con la fecha */}
@@ -341,26 +428,23 @@ function App() {
                       </div>
                       <div className="flex items-center p-2 gap-2">
                         <button
-                          className={`py-[2px] px-[18px] rounded-md text-white font-medium`}
-                          style={{ backgroundColor: evento.modalidadColor }}
+                          className="py-[2px] px-[18px] rounded-md text-white font-medium"
+                          style={{ backgroundColor: colores.colorCampus }}
                         >
-                          {evento.modalidad}
+                          Campus {formatearCampus(evento.campus)}
                         </button>
-                        {/* Submodalidad en caso de que exista */}
-                        {evento.subModalidad && (
+                        {evento.campus && (
                           <button
                             className="py-[2px] px-[18px] rounded-md text-white font-medium"
-                            style={{
-                              backgroundColor: evento.subModalidadColor,
-                            }}
+                            style={{ backgroundColor: colores.colorModalidad }}
                           >
-                            {evento.subModalidad}
+                            {evento.modalidad}
                           </button>
                         )}
                       </div>
                       <div className="w-full h-full flex justify-end items-end">
                         <div className="py-4">
-                          <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont self-center rounded-sm">
+                          <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont rounded-sm">
                             Ver detalles
                           </button>
                         </div>
@@ -371,13 +455,6 @@ function App() {
               ))}
             </div>
           ))}
-
-          {/* Botón para ver más eventos */}
-          <div className="py-2 px-8 flex justify-end">
-            <button className="bg-sky-500 px-6 py-2 text-white font-bold font-mont rounded-sm self-end">
-              Ver más eventos
-            </button>
-          </div>
         </div>
       </div>
     </div>
