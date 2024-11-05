@@ -528,11 +528,11 @@ const Principal = () => {
               <h1 className="border-l-4 border-yellow-500 pl-[30px] text-white font-mont font-bold text-[32px] self-center text-center">
                 Eventos
               </h1>
-              <div className="flex">
+              {/* <div className="flex">
                 <button className="bg-[#E5B300] h-[36px] px-6 text-white font-bold font-mont self-center rounded-sm">
                   Publicar Evento
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
