@@ -11,6 +11,7 @@ import {
 import EventoType from "../type/Evento";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const formatearCampus = (campusList: string[]) => {
   if (campusList.length === 1) return campusList[0];
@@ -26,6 +27,20 @@ const Evento = () => {
   if (!evento) {
     return <div>No se encontró información del evento.</div>;
   }
+
+	const [nombre, setNombre] = useState("");
+	const [correo, setCorreo] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleInscribirse = () => {
+		setNombre("")
+		setCorreo("")
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="w-full h-full">
@@ -124,9 +139,9 @@ const Evento = () => {
       </div>
 
       {/* Encabezado principal con imagen de fondo */}
-      <div className="w-full relative">
+      <div className="w-full relative overflow-hidden max-h-[450px]">
         <img
-          src="/evento_hidrogeno.jpg"
+          src={evento.imagen}
           alt=""
           className="w-full h-full object-left-bottom"
         />
@@ -253,7 +268,83 @@ const Evento = () => {
             <p className="text-start">{evento.descripcion1}</p>
             <p className="text-start">{evento.descripcion2}</p>
           </div>
+          <div className="w-full flex justify-center mt-10">
+            <div className="w-1/2 p-6 rounded-lg ">
+              <h3 className="font-mont font-semibold text-lg mb-4 flex">
+                Inscríbete al evento para recibir un recordatorio:
+              </h3>
+							<p className="text-pink-600 text-sm mb-4 flex">(*) campos obligatorios</p>
+
+              <div className="flex flex-col items-start mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="nombre"
+                >
+                  Nombre <span className="text-pink-600">*</span>
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-[275px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="nombre"
+                  type="text"
+                  placeholder="Nombre"
+									onChange={(e) => setNombre(e.target.value)}
+									value={nombre}
+                />
+              </div>
+
+              <div className="flex flex-col items-start mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="correo"
+                >
+                  Correo Electrónico <span className="text-pink-600">*</span>
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-[275px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="correo"
+                  type="email"
+                  placeholder="Correo Electrónico"
+									onChange={(e) => setCorreo(e.target.value)}
+									value={correo}
+                />
+              </div>
+
+              <div className="flex justify-end space-x-4 mt-10 mr-20">
+                <Link
+                  to="/"
+                  className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Volver
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleInscribirse}
+                  className="bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded inline-flex items-center"
+                >
+                  Inscribirse
+                  <span className="ml-2">→</span>
+                </button>
+              </div>
+
+              {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                  <div className="bg-white rounded-lg p-6 shadow-lg text-center">
+                    <h3 className="text-lg font-bold mb-4">
+                      Te inscribiste correctamente!
+                    </h3>
+                    <button
+                      onClick={handleCloseModal}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
+
         <div className="w-3/12 flex items-end relative">
           <img
             className="absolute p- w-72 -top-12 left-12 rounded-xl shadow-sm shadow-black"
