@@ -1,9 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faDoorOpen, faPersonBooth, faMapPin, faBook,faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import EventoType from '../type/Evento';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+const formatearCampus = (campusList: string[]) => {
+    if (campusList.length === 1) return campusList[0];
+    const campusListCopy = [...campusList];
+    const ultimaSede = campusListCopy.pop();
+    return `${campusListCopy.join(", ")} y ${ultimaSede}`;
+};
 
 
 const Evento = () => {
+    const location = useLocation();
+    const evento = location.state as EventoType;
+
+    if (!evento) {
+        return <div>No se encontró información del evento.</div>;
+    }
+
     return (
 
         <div className="w-full h-full">
@@ -200,9 +217,9 @@ const Evento = () => {
                         {/* Título y botón de publicar evento */}
                         <div className="flex justify-between align-middle relative">
                             <h1 style={{ color: "white", textShadow: "4px 4px 6px rgba(0, 0, 0, 0.7)" }} className="max-w-[65vw] border-l-4 border-yellow-500 pl-[30px] text-white font-mont font-bold text-[36px] self-center">
-                                Seminario «Una mirada al hidrógeno y el amoníaco como vectores energéticos en Chile»
+                                {evento.titulo}
                             </h1>
-                            <img className="absolute w-72 top-8 right-12 rounded-xl shadow-sm shadow-black" src="/evento_hidrogeno_completa.webp" alt="" />
+                            <img className="absolute w-72 top-8 right-12 rounded-xl shadow-sm shadow-black" src={evento.imagen} alt="" />
                         </div>
                     </div>
                 </div>
@@ -214,14 +231,16 @@ const Evento = () => {
                     <ul className="w-full flex gap-1 py-[25px] pl-[45px] font-mont text-[14px]">
                         <li className="text-[#005E90] border-l-4 border-[#005E90] pl-2">Inicio</li>
                         <li>»</li>
-                        <li className="text-[#005E90]">Eventos</li>
+                        <li className="text-[#005E90]">
+                            <Link to="/" className="text-[#005E90]">Eventos</Link>
+                        </li>
                         <li>»</li>
-                        <li className="text-stone-700 font-bold">Seminario “Una mirada al hidrógeno y el amoníaco como vectores energéticos en Chile”</li>
+                        <li className="text-stone-700 font-bold">{evento.titulo}</li>
                     </ul>
                     <div className="w-full h-full pl-[60px] flex flex-col font-mont text-[14px] text-[#3B424C] gap-4">
 
-                        <p>La Universidad Técnica Federico Santa María, a través de su Departamento de Ingeniería Mecánica, les invita cordialmente a participar del seminario "Una mirada al hidrógeno y el amoníaco como vectores energéticos en Chile".</p>
-                        <p>Esta actividad se realizará el martes 5 noviembre, a las 10:30 horas, en el Salón de Actos del Edificio T del Campus Casa Central Valparaíso.</p>
+                        <p>{evento.descripcion1}</p>
+                        <p>{evento.descripcion2}</p>
 
                     </div>
                 </div>
@@ -235,71 +254,71 @@ const Evento = () => {
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faCalendarCheck} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
-                                    <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Fecha:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>05/11/2024</div>
+                                    <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Fecha inicio:</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.fechaInicio}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faCalendarCheck} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Fecha termino:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>05/11/2024</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.fechaTermino}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faClock} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Hora de inicio:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>10:30</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.horaInicio}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faClock} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Hora de término:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>12:30</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.horaTermino}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faDoorOpen} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Público:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Profesores</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.publico}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faPersonBooth} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Modalidad:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Mixta</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.modalidad}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faMapPin} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Ubicación:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Campus Casa Central Valparaíso</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Campus {formatearCampus(evento.campus)}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faMapMarkerAlt} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Lugar:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Salon de actos T</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.lugar}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faBook} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
                                     <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Temática:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>Investigación</div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.tematica}</div>
                                 </div>
                             </div>
                             <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                                 <div className="flex items-center"><FontAwesomeIcon className='text-[#E5B300] text-xl my-auto' icon={faEnvelope} aria-hidden="true" /></div>
                                 <div className="flex flex-wrap items-center gap-2 pl-4">
-                                    <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Consultas a:</div>
-                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'></div>
+                                    <div className='text-[#005E90] font-bold text-[15px] font-mont my-auto'>Consultas: </div>
+                                    <div className='text-[#3B424C] text-[15px] font-mont font-medium my-auto'>{evento.consultas}</div>
                                 </div>
                             </div>
                         </div>

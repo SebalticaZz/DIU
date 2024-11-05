@@ -1,21 +1,11 @@
 import { useState } from 'react'
 import Filtros from '../components/Filtros';
+import { useNavigate } from 'react-router-dom';
+import EventoType from '../type/Evento';
 
-type Evento = {
-    dia: number;
-    diaSemana: string;
-    titulo: string;
-    modalidad: string;
-    imagen: string;
-    campus: string[];
-    tematica?: string;
-    tematicaColor?: string;
-    publico?: string;
-    publicoColor?: string;
-  };
   
   type EventosPorMes = {
-    [mes: string]: Evento[];
+    [mes: string]: EventoType[];
   };
   
   const colores = {
@@ -43,6 +33,15 @@ type Evento = {
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/evento_costumbrista.png",
+        //
+        fechaInicio: "17/09/2024",
+        fechaTermino: "17/09/2024",
+        horaInicio: "10:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Patio Central",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su campus San Joaquín, invita a toda la comunidad a participar en la \"Muestra costumbrista 2024\", un evento que celebra nuestras tradiciones y cultura chilena en el marco de las Fiestas Patrias.",
+        descripcion2: "Esta actividad se llevará a cabo el viernes 17 de septiembre, a partir de las 10:00 horas, en el Campus San Joaquín, donde podrán disfrutar de una variedad de actividades tradicionales, música en vivo y gastronomía típica chilena."
       },
       {
         dia: 29,
@@ -55,6 +54,8 @@ type Evento = {
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/naturaleza.png",
+        //
+        
       }
     ],
     Octubre: [
@@ -168,6 +169,12 @@ const Principal = () => {
   const [campus, setCampus] = useState<string>("");
   const [tematica, setTematica] = useState<string>("");
   const [publico, setPublico] = useState<string>("");
+
+  const navigate = useNavigate();
+  
+  const handleVerDetalles = (evento: EventoType) => {
+    navigate('/evento', { state: evento });
+  };
 
   const filtrarEventos = () => {
     const mesesFiltrados: EventosPorMes = {};
@@ -493,7 +500,7 @@ const Principal = () => {
                       </div>
                       <div className="w-full h-full flex justify-end items-end">
                         <div className="py-4">
-                          <button className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont rounded-sm">
+                          <button onClick={() => handleVerDetalles(evento)} className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont rounded-sm">
                             Ver detalles
                           </button>
                         </div>
