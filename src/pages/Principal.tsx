@@ -292,10 +292,20 @@ const Principal = () => {
   const navigate = useNavigate();
 
   const handleVerDetalles = (evento: EventoType) => {
+    window.scrollTo({
+      top: 220,
+      behavior: "smooth" 
+    });
+
     navigate("/evento", { state: evento });
   };
 
   const filtrarEventos = () => {
+    window.scrollTo({
+      top: 30,
+      behavior: "smooth" 
+    });
+    
     const mesesFiltrados: EventosPorMes = {};
 
     Object.keys(eventosPorMes).forEach((mesKey) => {

@@ -264,16 +264,16 @@ const Evento = () => {
             <li>»</li>
             <li className="text-stone-700 font-bold">{evento.titulo}</li>
           </ul>
-          <div className="w-full h-full pl-[60px] flex flex-col font-mont text-[14px] text-[#3B424C] gap-4">
+          <div className="w-full h-full pl-[60px] flex flex-col font-mont text-[20px] text-[#3B424C] gap-4">
             <p className="text-start">{evento.descripcion1}</p>
             <p className="text-start">{evento.descripcion2}</p>
           </div>
-          <div className="w-full flex justify-center mt-10">
+          <div className="w-full flex justify-center mt-10 text-[20px]">
             <div className="w-1/2 p-6 rounded-lg ">
-              <h3 className="font-mont font-semibold text-lg mb-4 flex">
+              <h3 className="font-mont font-semibold text-lg mb-4 flex text-[20px]">
                 Inscríbete al evento para recibir un recordatorio:
               </h3>
-              <p className="text-pink-600 text-sm mb-4 flex">
+              <p className="text-pink-600 text-sm mb-4 flex text-[20px]">
                 (*) campos obligatorios
               </p>
 
