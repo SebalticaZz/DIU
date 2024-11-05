@@ -55,6 +55,14 @@ import EventoType from '../type/Evento';
         publicoColor: "#005E90",
         imagen: "/naturaleza.png",
         //
+        fechaInicio: "29/09/2024",
+        fechaTermino: "29/09/2024",
+        horaInicio: "12:00pm",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Patio Central",
+        descripcion1: "La Universidad Técnica Federico Santa María, en colaboración con su campus Vitacura, invita a participar en el módulo interactivo \"Naturaleza a tu pinta\". Este evento está diseñado para fomentar el vínculo con el medio ambiente a través de actividades prácticas y educativas.",
+        descripcion2: "Esta actividad se realizará el martes 29 de septiembre, de manera presencial en el campus Vitacura. Está abierta a todo público y ofrecerá una experiencia única para conocer y explorar la naturaleza de forma entretenida e interactiva."
         
       }
     ],
@@ -70,6 +78,15 @@ import EventoType from '../type/Evento';
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/evento_ferialab.png",
+        //
+        fechaInicio: "01/10/2024",
+        fechaTermino: "01/10/2024",
+        horaInicio: "09:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Plataforma Online",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en las \"Ferias laborales 2024\", un evento que busca conectar a estudiantes y egresados con empresas líderes en el mercado.",
+        descripcion2: "Esta actividad se llevará a cabo el martes 1 de octubre, a partir de las 09:00 horas, en la Plataforma Online de la USM, donde podrán disfrutar de charlas, talleres y ofertas laborales exclusivas para la comunidad universitaria."
       },
       {
         dia: 11,
@@ -82,6 +99,15 @@ import EventoType from '../type/Evento';
         publico: "Ex-Alumnos",
         publicoColor: "#005E90",
         imagen: "/evento_encuentroalumno.png",
+        //
+        fechaInicio: "11/10/2024",
+        fechaTermino: "11/10/2024",
+        horaInicio: "10:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Viña del Mar",
+        descripcion1: "La Universidad Técnica Federico Santa María, invita a todos los ex-alumnos a participar en el \"Encuentro Alumni USM\", un evento que busca reunir a la comunidad de egresados de la universidad.",
+        descripcion2: "Esta actividad se llevará a cabo el viernes 11 de octubre, a partir de las 10:00 horas, en el campus Viña del Mar, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la USM."
       },
       {
         dia: 24,
@@ -93,7 +119,16 @@ import EventoType from '../type/Evento';
         tematicaColor: "#005E90",
         publico: "Estudiantes",
         publicoColor: "#005E90",
-        imagen: "/inovacion.png"
+        imagen: "/inovacion.png",
+        //
+        fechaInicio: "24/10/2024",
+        fechaTermino: "24/10/2024",
+        horaInicio: "15:00pm",
+        horaTermino: "17:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Auditorio Campus San Joaquín",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a todos los estudiantes a participar en la charla \"Conoce la empresa, sus oportunidades y más\", organizada por la empresa WSP.",
+        descripcion2: "Esta actividad se llevará a cabo el jueves 24 de octubre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la empresa, sus proyectos y oportunidades laborales."
       }
     ],
     Noviembre: [
@@ -108,6 +143,15 @@ import EventoType from '../type/Evento';
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/tesis180.png",
+        //
+        fechaInicio: "12/11/2024",
+        fechaTermino: "12/11/2024",
+        horaInicio: "09:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Auditorio Campus San Joaquín",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en el concurso \"Mi tesis en 180 segundos\", un evento que busca difundir la investigación y proyectos de tesis de los estudiantes.",
+        descripcion2: "Esta actividad se llevará a cabo el martes 12 de noviembre, a partir de las 09:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre los proyectos de tesis de los estudiantes de la USM."
       },
       {
         dia: 15,
@@ -120,6 +164,15 @@ import EventoType from '../type/Evento';
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/feria_software.png",
+        //
+        fechaInicio: "15/11/2024",
+        fechaTermino: "15/11/2024",
+        horaInicio: "09:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Patio Central",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en la 32ª Feria de Software USM, un evento que busca difundir los proyectos y desarrollos de los estudiantes de la universidad.",
+        descripcion2: "Esta actividad se llevará a cabo el viernes 15 de noviembre, a partir de las 09:00 horas, en el Patio Central de la USM, donde podrán disfrutar de una variedad de proyectos de software y tecnología desarrollados por los estudiantes."
       },
       {
         dia: 23,
@@ -132,6 +185,15 @@ import EventoType from '../type/Evento';
         publico: "Ex-Alumnos",
         publicoColor: "#005E90",
         imagen: "/alumni_informatica.png",
+        //
+        fechaInicio: "23/11/2024",
+        fechaTermino: "23/11/2024",
+        horaInicio: "10:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Casa Central Valparaíso",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Departamento de Informática, invita a todos los ex-alumnos a participar en el \"Encuentro Alumni 2024\", un evento que busca reunir a la comunidad de egresados de la carrera de Informática.",
+        descripcion2: "Esta actividad se llevará a cabo el sábado 23 de noviembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la carrera de Informática."
       }
     ],
     Diciembre: [
@@ -146,6 +208,15 @@ import EventoType from '../type/Evento';
         publico: "Abierto a todo público",
         publicoColor: "#005E90",
         imagen: "/charla_astronomia.png",
+        //
+        fechaInicio: "16/12/2024",
+        fechaTermino: "16/12/2024",
+        horaInicio: "10:00am",
+        horaTermino: "18:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Casa Central Valparaíso",
+        descripcion1: "La Universidad Técnica Federico Santa María, invita a toda la comunidad a participar en el \"Día de la astronomía en la USM\", un evento que busca difundir la astronomía y la ciencia espacial.",
+        descripcion2: "Esta actividad se llevará a cabo el lunes 16 de diciembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas relacionadas con la astronomía."
       },
       {
         dia: 19,
@@ -158,6 +229,15 @@ import EventoType from '../type/Evento';
         publico: "Comunidad Universitaria",
         publicoColor: "#005E90",
         imagen: "/charla_matematica.png",
+        //
+        fechaInicio: "19/12/2024",
+        fechaTermino: "19/12/2024",
+        horaInicio: "15:00pm",
+        horaTermino: "17:00pm",
+        consultas: "relacionesestudiantiles@usm.cl",
+        lugar: "Auditorio Campus San Joaquín",
+        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad universitaria a participar en la charla \"The mathematical language of Galileo Galilei\", organizada por el Departamento de Matemáticas.",
+        descripcion2: "Esta actividad se llevará a cabo el miércoles 19 de diciembre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la vida y obra de Galileo Galilei y su aporte a las matemáticas."
       }
     ]
   };
