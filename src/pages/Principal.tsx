@@ -409,7 +409,7 @@ const Principal = () => {
       </div>
 
       {/* Encabezado principal con imagen de fondo */}
-      <div className="w-full relative">
+      <div className="w-full max-h-[320px] overflow-hidden relative">
         <img
           src="https://usm.cl/wp-content/uploads/2021/04/banner-eventos.jpg"
           alt=""
