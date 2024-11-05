@@ -139,7 +139,7 @@ const Evento = () => {
       </div>
 
       {/* Encabezado principal con imagen de fondo */}
-      <div className="w-full relative overflow-hidden max-h-[450px]">
+      <div className="w-full relative overflow-hidden max-h-[320px]">
         <img
           src={evento.imagen}
           alt=""
