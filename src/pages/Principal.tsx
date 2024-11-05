@@ -187,6 +187,27 @@ const eventosPorMes: EventosPorMes = {
         "Esta actividad se llevará a cabo el viernes 15 de noviembre, a partir de las 09:00 horas, en el Patio Central de la USM, donde podrán disfrutar de una variedad de proyectos de software y tecnología desarrollados por los estudiantes.",
     },
     {
+      dia: 17,
+      diaSemana: "Domingo",
+      titulo: "Daniel Muñoz y Los Marujos se presentan en la Gala Folclórica USM",
+      modalidad: "Presencial",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Cultura, Arte y Recreación",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/daniel_munos.png",
+      //
+      fechaInicio: "17/11/2024",
+      fechaTermino: "17/11/2024",
+      horaInicio: "19:00pm",
+      horaTermino: "20:30pm",
+      consultas: "cultura@usm.cl",
+      lugar: "Teatro Aula Magna Campus",
+      descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Cultura, invita a toda la comunidad a participar en el evento de los Marujos que se presentan en la Gala Folcrórica USM, un evento que busca difundir y promover la música y danza folclórica chilena.",
+      descripcion2: "Esta actividad se llevará a cabo el domingo 17 de noviembre, a partir de las 19:00 horas, en el Teatro Aula Magna del Campus San Joaquín, donde podrán disfrutar de un espectáculo de música y danza folclórica a cargo de Daniel Muñoz y Los Marujos.",
+    },
+    {
       dia: 23,
       diaSemana: "Sábado",
       titulo: "Encuentro Alumni 2024 Departamento de Informática",
@@ -545,7 +566,18 @@ const Principal = () => {
 
         {/* Contenedor de eventos filtrados */}
         <div className="w-4/5 px-8 py-6 flex flex-col gap-6">
-          {Object.keys(eventosFiltrados).map((mesKey) => (
+        {(mes || modalidad || campus || tematica || publico) && (
+          <div className="flex items-center gap-2 mb-4 text-xl">
+            <span className="text-gray-700 font-semibold">Filtros:</span>
+            {mes && <span className="bg-sky-500 text-white py-1 px-3 rounded-md">{mes}</span>}
+            {modalidad && <span className="bg-sky-500 text-white py-1 px-3 rounded-md">{modalidad}</span>}
+            {campus && <span className="bg-sky-500 text-white py-1 px-3 rounded-md">{campus}</span>}
+            {tematica && <span className="bg-sky-500 text-white py-1 px-3 rounded-md">{tematica}</span>}
+            {publico && <span className="bg-sky-500 text-white py-1 px-3 rounded-md">{publico}</span>}
+          </div>
+        )}
+        {Object.keys(eventosFiltrados).length > 0 ? (
+          Object.keys(eventosFiltrados).map((mesKey) => (
             <div
               key={mesKey}
               className="flex flex-col items-center w-full gap-6"
@@ -621,7 +653,12 @@ const Principal = () => {
                 </div>
               ))}
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="text-center text-gray-500 font-mont text-xl mt-10">
+            No hay eventos para los filtros seleccionados.
+          </div>
+        )}
         </div>
       </div>
       <div className="w-full">
