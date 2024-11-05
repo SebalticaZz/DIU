@@ -625,7 +625,7 @@ const Principal = () => {
         </div>
       </div>
       <div className="w-full">
-        <img src="footer.png" alt="" />
+        <img className="w-full" src="footer.png" alt="" />
       </div>
     </div>
   );
