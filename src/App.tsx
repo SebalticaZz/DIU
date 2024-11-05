@@ -46,6 +46,18 @@ const eventosPorMes: EventosPorMes = {
       publicoColor: "#005E90",
       imagen: "/evento_costumbrista.png",
     },
+    {
+      dia: 29,
+      diaSemana: "Martes",
+      titulo: "Módulo interactivo «Naturaleza a tu pinta»",
+      modalidad: "Presencial",
+      campus: ["Vitacura"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/naturaleza.png",
+    }
   ],
   Octubre: [
     {
@@ -53,7 +65,7 @@ const eventosPorMes: EventosPorMes = {
       diaSemana: "Martes",
       titulo: "Ferias laborales 2024",
       modalidad: "Online",
-      campus: ["Casa Central Valparaíso"],
+      campus: ["Plataforma Online"],
       tematica: "Vinculación con el Medio",
       tematicaColor: "#005E90",
       publico: "Abierto a todo público",
@@ -72,6 +84,18 @@ const eventosPorMes: EventosPorMes = {
       publicoColor: "#005E90",
       imagen: "/evento_encuentroalumno.png",
     },
+    {
+      dia: 24,
+      diaSemana: "Jueves",
+      titulo: "Charla WSP «Conoce la empresa, sus oportunidades y más»",
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Innovación",
+      tematicaColor: "#005E90",
+      publico: "Estudiantes",
+      publicoColor: "#005E90",
+      imagen: "/inovacion.png"
+    }
   ],
   Noviembre: [
     {
@@ -109,6 +133,32 @@ const eventosPorMes: EventosPorMes = {
       publico: "Ex-Alumnos",
       publicoColor: "#005E90",
       imagen: "/alumni_informatica.png",
+    }
+  ],
+  Diciembre: [
+    {
+      dia: 16,
+      diaSemana: "Lunes",
+      titulo: "Día de la astronomía en la USM",
+      modalidad: "Presencial",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Docencia",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/charla_astronomia.png",
+    },
+    {
+      dia: 19,
+      diaSemana: "Miércoles",
+      titulo: "Charla \"The mathematical language of Galileo Galilei\"",
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Investigación",
+      tematicaColor: "#005E90",
+      publico: "Comunidad Universitaria",
+      publicoColor: "#005E90",
+      imagen: "/charla_matematica.png",
     }
   ]
 };
@@ -427,12 +477,14 @@ function App() {
                         </h3>
                       </div>
                       <div className="flex items-center p-2 gap-2">
-                        <button
-                          className="py-[2px] px-[18px] rounded-md text-white font-medium"
-                          style={{ backgroundColor: colores.colorCampus }}
-                        >
-                          Campus {formatearCampus(evento.campus)}
-                        </button>
+                        {Array.isArray(evento.campus) && !evento.campus.includes("Plataforma Online") && (
+                          <button
+                            className="py-[2px] px-[18px] rounded-md text-white font-medium"
+                            style={{ backgroundColor: colores.colorCampus }}
+                          >
+                            {formatearCampus(evento.campus)}
+                          </button>
+                        )}
                         {evento.campus && (
                           <button
                             className="py-[2px] px-[18px] rounded-md text-white font-medium"

@@ -114,7 +114,6 @@ const Filtros: React.FC<FiltrosProps> = ({
             <MenuItem value="Viña del Mar">Viña del Mar</MenuItem>
             <MenuItem value="Concepción">Concepción</MenuItem>
             <MenuItem value="Varios">Varios</MenuItem>
-            <MenuItem value="Plataforma Online">Plataforma Online</MenuItem>
           </CustomSelect>
         </FormControl>
 
@@ -142,8 +141,8 @@ const Filtros: React.FC<FiltrosProps> = ({
             label="Público"
           >
             <MenuItem value=""> <em>Ninguno</em> </MenuItem>
-            <MenuItem value="Alumnos">Alumnos</MenuItem>
-            <MenuItem value="Funcionarios">Funcionarios</MenuItem>
+            <MenuItem value="Estudiantes">Estudiantes</MenuItem>
+            <MenuItem value="Académicos">Académicos</MenuItem>
             <MenuItem value="Abierto a todo público">Abierto a todo público</MenuItem>
             <MenuItem value="Ex-Alumnos">Ex-Alumnos</MenuItem>
           </CustomSelect>
