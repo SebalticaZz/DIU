@@ -1,246 +1,264 @@
-import { useState } from 'react'
-import Filtros from '../components/Filtros';
-import { useNavigate } from 'react-router-dom';
-import EventoType from '../type/Evento';
+import { useState } from "react";
+import Filtros from "../components/Filtros";
+import { useNavigate } from "react-router-dom";
+import EventoType from "../type/Evento";
 
-  
-  type EventosPorMes = {
-    [mes: string]: EventoType[];
-  };
-  
-  const colores = {
-    colorCampus : "#00815C",
-    colorModalidad : "#005E90",
-  }
-  
-  const formatearCampus = (campusList: string[]) => {
-    if (campusList.length === 1) return campusList[0];
-    const campusListCopy = [...campusList];
-    const ultimaSede = campusListCopy.pop();
-    return `${campusListCopy.join(", ")} y ${ultimaSede}`;
-  };
-  
-  const eventosPorMes: EventosPorMes = {
-    Septiembre: [
-      {
-        dia: 17,
-        diaSemana: "Viernes",
-        titulo: "Muestra costumbrista 2024",
-        modalidad: "Presencial",
-        campus: ["San Joaquín"],
-        tematica: "Cultura, Arte y Recreación",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/evento_costumbrista.png",
-        //
-        fechaInicio: "17/09/2024",
-        fechaTermino: "17/09/2024",
-        horaInicio: "10:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Patio Central",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su campus San Joaquín, invita a toda la comunidad a participar en la \"Muestra costumbrista 2024\", un evento que celebra nuestras tradiciones y cultura chilena en el marco de las Fiestas Patrias.",
-        descripcion2: "Esta actividad se llevará a cabo el viernes 17 de septiembre, a partir de las 10:00 horas, en el Campus San Joaquín, donde podrán disfrutar de una variedad de actividades tradicionales, música en vivo y gastronomía típica chilena."
-      },
-      {
-        dia: 29,
-        diaSemana: "Martes",
-        titulo: "Módulo interactivo «Naturaleza a tu pinta»",
-        modalidad: "Presencial",
-        campus: ["Vitacura"],
-        tematica: "Vinculación con el Medio",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/naturaleza.png",
-        //
-        fechaInicio: "29/09/2024",
-        fechaTermino: "29/09/2024",
-        horaInicio: "12:00pm",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Patio Central",
-        descripcion1: "La Universidad Técnica Federico Santa María, en colaboración con su campus Vitacura, invita a participar en el módulo interactivo \"Naturaleza a tu pinta\". Este evento está diseñado para fomentar el vínculo con el medio ambiente a través de actividades prácticas y educativas.",
-        descripcion2: "Esta actividad se realizará el martes 29 de septiembre, de manera presencial en el campus Vitacura. Está abierta a todo público y ofrecerá una experiencia única para conocer y explorar la naturaleza de forma entretenida e interactiva."
-        
-      }
-    ],
-    Octubre: [
-      {
-        dia: 1,
-        diaSemana: "Martes",
-        titulo: "Ferias laborales 2024",
-        modalidad: "Online",
-        campus: ["Plataforma Online"],
-        tematica: "Vinculación con el Medio",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/evento_ferialab.png",
-        //
-        fechaInicio: "01/10/2024",
-        fechaTermino: "01/10/2024",
-        horaInicio: "09:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Plataforma Online",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en las \"Ferias laborales 2024\", un evento que busca conectar a estudiantes y egresados con empresas líderes en el mercado.",
-        descripcion2: "Esta actividad se llevará a cabo el martes 1 de octubre, a partir de las 09:00 horas, en la Plataforma Online de la USM, donde podrán disfrutar de charlas, talleres y ofertas laborales exclusivas para la comunidad universitaria."
-      },
-      {
-        dia: 11,
-        diaSemana: "Viernes",
-        titulo: "Encuentro Alumni USM",
-        modalidad: "Presencial",
-        campus: ["Viña del Mar"],
-        tematica: "Vinculación con el Medio",
-        tematicaColor: "#005E90",
-        publico: "Ex-Alumnos",
-        publicoColor: "#005E90",
-        imagen: "/evento_encuentroalumno.png",
-        //
-        fechaInicio: "11/10/2024",
-        fechaTermino: "11/10/2024",
-        horaInicio: "10:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Viña del Mar",
-        descripcion1: "La Universidad Técnica Federico Santa María, invita a todos los ex-alumnos a participar en el \"Encuentro Alumni USM\", un evento que busca reunir a la comunidad de egresados de la universidad.",
-        descripcion2: "Esta actividad se llevará a cabo el viernes 11 de octubre, a partir de las 10:00 horas, en el campus Viña del Mar, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la USM."
-      },
-      {
-        dia: 24,
-        diaSemana: "Jueves",
-        titulo: "Charla WSP «Conoce la empresa, sus oportunidades y más»",
-        modalidad: "Presencial",
-        campus: ["San Joaquín"],
-        tematica: "Innovación",
-        tematicaColor: "#005E90",
-        publico: "Estudiantes",
-        publicoColor: "#005E90",
-        imagen: "/inovacion.png",
-        //
-        fechaInicio: "24/10/2024",
-        fechaTermino: "24/10/2024",
-        horaInicio: "15:00pm",
-        horaTermino: "17:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Auditorio Campus San Joaquín",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a todos los estudiantes a participar en la charla \"Conoce la empresa, sus oportunidades y más\", organizada por la empresa WSP.",
-        descripcion2: "Esta actividad se llevará a cabo el jueves 24 de octubre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la empresa, sus proyectos y oportunidades laborales."
-      }
-    ],
-    Noviembre: [
-      {
-        dia: 12,
-        diaSemana: "Martes",
-        titulo: "Concurso «Mi tesis en 180 segundos»",
-        modalidad: "Presencial",
-        campus: ["San Joaquín"],
-        tematica: "Investigación",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/tesis180.png",
-        //
-        fechaInicio: "12/11/2024",
-        fechaTermino: "12/11/2024",
-        horaInicio: "09:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Auditorio Campus San Joaquín",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en el concurso \"Mi tesis en 180 segundos\", un evento que busca difundir la investigación y proyectos de tesis de los estudiantes.",
-        descripcion2: "Esta actividad se llevará a cabo el martes 12 de noviembre, a partir de las 09:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre los proyectos de tesis de los estudiantes de la USM."
-      },
-      {
-        dia: 15,
-        diaSemana: "Viernes",
-        titulo: "32ª Feria de Software USM",
-        modalidad: "Presencial",
-        campus: ["San Joaquín", "Viña del Mar", "Casa Central Valparaíso"],
-        tematica: "Docencia",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/feria_software.png",
-        //
-        fechaInicio: "15/11/2024",
-        fechaTermino: "15/11/2024",
-        horaInicio: "09:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Patio Central",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en la 32ª Feria de Software USM, un evento que busca difundir los proyectos y desarrollos de los estudiantes de la universidad.",
-        descripcion2: "Esta actividad se llevará a cabo el viernes 15 de noviembre, a partir de las 09:00 horas, en el Patio Central de la USM, donde podrán disfrutar de una variedad de proyectos de software y tecnología desarrollados por los estudiantes."
-      },
-      {
-        dia: 23,
-        diaSemana: "Sábado",
-        titulo: "Encuentro Alumni 2024 Departamento de Informática",
-        modalidad: "Presencial",
-        campus: ["Casa Central Valparaíso"],
-        tematica: "Vinculación con el Medio",
-        tematicaColor: "#005E90",
-        publico: "Ex-Alumnos",
-        publicoColor: "#005E90",
-        imagen: "/alumni_informatica.png",
-        //
-        fechaInicio: "23/11/2024",
-        fechaTermino: "23/11/2024",
-        horaInicio: "10:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Casa Central Valparaíso",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Departamento de Informática, invita a todos los ex-alumnos a participar en el \"Encuentro Alumni 2024\", un evento que busca reunir a la comunidad de egresados de la carrera de Informática.",
-        descripcion2: "Esta actividad se llevará a cabo el sábado 23 de noviembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la carrera de Informática."
-      }
-    ],
-    Diciembre: [
-      {
-        dia: 16,
-        diaSemana: "Lunes",
-        titulo: "Día de la astronomía en la USM",
-        modalidad: "Presencial",
-        campus: ["Casa Central Valparaíso"],
-        tematica: "Docencia",
-        tematicaColor: "#005E90",
-        publico: "Abierto a todo público",
-        publicoColor: "#005E90",
-        imagen: "/charla_astronomia.png",
-        //
-        fechaInicio: "16/12/2024",
-        fechaTermino: "16/12/2024",
-        horaInicio: "10:00am",
-        horaTermino: "18:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Casa Central Valparaíso",
-        descripcion1: "La Universidad Técnica Federico Santa María, invita a toda la comunidad a participar en el \"Día de la astronomía en la USM\", un evento que busca difundir la astronomía y la ciencia espacial.",
-        descripcion2: "Esta actividad se llevará a cabo el lunes 16 de diciembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas relacionadas con la astronomía."
-      },
-      {
-        dia: 19,
-        diaSemana: "Miércoles",
-        titulo: "Charla \"The mathematical language of Galileo Galilei\"",
-        modalidad: "Presencial",
-        campus: ["San Joaquín"],
-        tematica: "Investigación",
-        tematicaColor: "#005E90",
-        publico: "Comunidad Universitaria",
-        publicoColor: "#005E90",
-        imagen: "/charla_matematica.png",
-        //
-        fechaInicio: "19/12/2024",
-        fechaTermino: "19/12/2024",
-        horaInicio: "15:00pm",
-        horaTermino: "17:00pm",
-        consultas: "relacionesestudiantiles@usm.cl",
-        lugar: "Auditorio Campus San Joaquín",
-        descripcion1: "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad universitaria a participar en la charla \"The mathematical language of Galileo Galilei\", organizada por el Departamento de Matemáticas.",
-        descripcion2: "Esta actividad se llevará a cabo el miércoles 19 de diciembre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la vida y obra de Galileo Galilei y su aporte a las matemáticas."
-      }
-    ]
-  };
+type EventosPorMes = {
+  [mes: string]: EventoType[];
+};
+
+const colores = {
+  colorCampus: "#00815C",
+  colorModalidad: "#005E90",
+};
+
+const formatearCampus = (campusList: string[]) => {
+  if (campusList.length === 1) return campusList[0];
+  const campusListCopy = [...campusList];
+  const ultimaSede = campusListCopy.pop();
+  return `${campusListCopy.join(", ")} y ${ultimaSede}`;
+};
+
+const eventosPorMes: EventosPorMes = {
+  Septiembre: [
+    {
+      dia: 17,
+      diaSemana: "Viernes",
+      titulo: "Muestra costumbrista 2024",
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Cultura, Arte y Recreación",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/evento_costumbrista.png",
+      //
+      fechaInicio: "17/09/2024",
+      fechaTermino: "17/09/2024",
+      horaInicio: "10:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Patio Central",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su campus San Joaquín, invita a toda la comunidad a participar en la "Muestra costumbrista 2024", un evento que celebra nuestras tradiciones y cultura chilena en el marco de las Fiestas Patrias.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el viernes 17 de septiembre, a partir de las 10:00 horas, en el Campus San Joaquín, donde podrán disfrutar de una variedad de actividades tradicionales, música en vivo y gastronomía típica chilena.",
+    },
+    {
+      dia: 29,
+      diaSemana: "Martes",
+      titulo: "Módulo interactivo «Naturaleza a tu pinta»",
+      modalidad: "Presencial",
+      campus: ["Vitacura"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/naturaleza.png",
+      //
+      fechaInicio: "29/09/2024",
+      fechaTermino: "29/09/2024",
+      horaInicio: "12:00pm",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Patio Central",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, en colaboración con su campus Vitacura, invita a participar en el módulo interactivo "Naturaleza a tu pinta". Este evento está diseñado para fomentar el vínculo con el medio ambiente a través de actividades prácticas y educativas.',
+      descripcion2:
+        "Esta actividad se realizará el martes 29 de septiembre, de manera presencial en el campus Vitacura. Está abierta a todo público y ofrecerá una experiencia única para conocer y explorar la naturaleza de forma entretenida e interactiva.",
+    },
+  ],
+  Octubre: [
+    {
+      dia: 1,
+      diaSemana: "Martes",
+      titulo: "Ferias laborales 2024",
+      modalidad: "Online",
+      campus: ["Plataforma Online"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/evento_ferialab.png",
+      //
+      fechaInicio: "01/10/2024",
+      fechaTermino: "01/10/2024",
+      horaInicio: "09:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Plataforma Online",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en las "Ferias laborales 2024", un evento que busca conectar a estudiantes y egresados con empresas líderes en el mercado.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el martes 1 de octubre, a partir de las 09:00 horas, en la Plataforma Online de la USM, donde podrán disfrutar de charlas, talleres y ofertas laborales exclusivas para la comunidad universitaria.",
+    },
+    {
+      dia: 11,
+      diaSemana: "Viernes",
+      titulo: "Encuentro Alumni USM",
+      modalidad: "Presencial",
+      campus: ["Viña del Mar"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Ex-Alumnos",
+      publicoColor: "#005E90",
+      imagen: "/evento_encuentroalumno.png",
+      //
+      fechaInicio: "11/10/2024",
+      fechaTermino: "11/10/2024",
+      horaInicio: "10:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Viña del Mar",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, invita a todos los ex-alumnos a participar en el "Encuentro Alumni USM", un evento que busca reunir a la comunidad de egresados de la universidad.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el viernes 11 de octubre, a partir de las 10:00 horas, en el campus Viña del Mar, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la USM.",
+    },
+    {
+      dia: 24,
+      diaSemana: "Jueves",
+      titulo: "Charla WSP «Conoce la empresa, sus oportunidades y más»",
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Innovación",
+      tematicaColor: "#005E90",
+      publico: "Estudiantes",
+      publicoColor: "#005E90",
+      imagen: "/inovacion.png",
+      //
+      fechaInicio: "24/10/2024",
+      fechaTermino: "24/10/2024",
+      horaInicio: "15:00pm",
+      horaTermino: "17:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Auditorio Campus San Joaquín",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a todos los estudiantes a participar en la charla "Conoce la empresa, sus oportunidades y más", organizada por la empresa WSP.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el jueves 24 de octubre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la empresa, sus proyectos y oportunidades laborales.",
+    },
+  ],
+  Noviembre: [
+    {
+      dia: 12,
+      diaSemana: "Martes",
+      titulo: "Concurso «Mi tesis en 180 segundos»",
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Investigación",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/tesis180.png",
+      //
+      fechaInicio: "12/11/2024",
+      fechaTermino: "12/11/2024",
+      horaInicio: "09:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Auditorio Campus San Joaquín",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en el concurso "Mi tesis en 180 segundos", un evento que busca difundir la investigación y proyectos de tesis de los estudiantes.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el martes 12 de noviembre, a partir de las 09:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre los proyectos de tesis de los estudiantes de la USM.",
+    },
+    {
+      dia: 15,
+      diaSemana: "Viernes",
+      titulo: "32ª Feria de Software USM",
+      modalidad: "Presencial",
+      campus: ["San Joaquín", "Viña del Mar", "Casa Central Valparaíso"],
+      tematica: "Docencia",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/feria_software.png",
+      //
+      fechaInicio: "15/11/2024",
+      fechaTermino: "15/11/2024",
+      horaInicio: "09:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Patio Central",
+      descripcion1:
+        "La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad a participar en la 32ª Feria de Software USM, un evento que busca difundir los proyectos y desarrollos de los estudiantes de la universidad.",
+      descripcion2:
+        "Esta actividad se llevará a cabo el viernes 15 de noviembre, a partir de las 09:00 horas, en el Patio Central de la USM, donde podrán disfrutar de una variedad de proyectos de software y tecnología desarrollados por los estudiantes.",
+    },
+    {
+      dia: 23,
+      diaSemana: "Sábado",
+      titulo: "Encuentro Alumni 2024 Departamento de Informática",
+      modalidad: "Presencial",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Vinculación con el Medio",
+      tematicaColor: "#005E90",
+      publico: "Ex-Alumnos",
+      publicoColor: "#005E90",
+      imagen: "/alumni_informatica.png",
+      //
+      fechaInicio: "23/11/2024",
+      fechaTermino: "23/11/2024",
+      horaInicio: "10:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Casa Central Valparaíso",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su Departamento de Informática, invita a todos los ex-alumnos a participar en el "Encuentro Alumni 2024", un evento que busca reunir a la comunidad de egresados de la carrera de Informática.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el sábado 23 de noviembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas exclusivas para los ex-alumnos de la carrera de Informática.",
+    },
+  ],
+  Diciembre: [
+    {
+      dia: 16,
+      diaSemana: "Lunes",
+      titulo: "Día de la astronomía en la USM",
+      modalidad: "Presencial",
+      campus: ["Casa Central Valparaíso"],
+      tematica: "Docencia",
+      tematicaColor: "#005E90",
+      publico: "Abierto a todo público",
+      publicoColor: "#005E90",
+      imagen: "/charla_astronomia.png",
+      //
+      fechaInicio: "16/12/2024",
+      fechaTermino: "16/12/2024",
+      horaInicio: "10:00am",
+      horaTermino: "18:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Casa Central Valparaíso",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, invita a toda la comunidad a participar en el "Día de la astronomía en la USM", un evento que busca difundir la astronomía y la ciencia espacial.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el lunes 16 de diciembre, a partir de las 10:00 horas, en la Casa Central Valparaíso, donde podrán disfrutar de charlas, talleres y actividades recreativas relacionadas con la astronomía.",
+    },
+    {
+      dia: 19,
+      diaSemana: "Miércoles",
+      titulo: 'Charla "The mathematical language of Galileo Galilei"',
+      modalidad: "Presencial",
+      campus: ["San Joaquín"],
+      tematica: "Investigación",
+      tematicaColor: "#005E90",
+      publico: "Comunidad Universitaria",
+      publicoColor: "#005E90",
+      imagen: "/charla_matematica.png",
+      //
+      fechaInicio: "19/12/2024",
+      fechaTermino: "19/12/2024",
+      horaInicio: "15:00pm",
+      horaTermino: "17:00pm",
+      consultas: "relacionesestudiantiles@usm.cl",
+      lugar: "Auditorio Campus San Joaquín",
+      descripcion1:
+        'La Universidad Técnica Federico Santa María, a través de su Dirección de Relaciones Estudiantiles, invita a toda la comunidad universitaria a participar en la charla "The mathematical language of Galileo Galilei", organizada por el Departamento de Matemáticas.',
+      descripcion2:
+        "Esta actividad se llevará a cabo el miércoles 19 de diciembre, a partir de las 15:00 horas, en el Auditorio del Campus San Joaquín, donde podrán conocer más sobre la vida y obra de Galileo Galilei y su aporte a las matemáticas.",
+    },
+  ],
+};
 
 const Principal = () => {
   // Estados para los filtros
@@ -251,9 +269,9 @@ const Principal = () => {
   const [publico, setPublico] = useState<string>("");
 
   const navigate = useNavigate();
-  
+
   const handleVerDetalles = (evento: EventoType) => {
-    navigate('/evento', { state: evento });
+    navigate("/evento", { state: evento });
   };
 
   const filtrarEventos = () => {
@@ -264,7 +282,11 @@ const Principal = () => {
         return (
           (mes ? mesKey === mes : true) &&
           (modalidad ? evento.modalidad === modalidad : true) &&
-          (campus === "Varios" ? evento.campus.length > 1 : campus ? evento.campus.includes(campus) : true) &&
+          (campus === "Varios"
+            ? evento.campus.length > 1
+            : campus
+            ? evento.campus.includes(campus)
+            : true) &&
           (tematica ? evento.tematica === tematica : true) &&
           (publico ? evento.publico === publico : true)
         );
@@ -289,7 +311,7 @@ const Principal = () => {
     setTematica("");
     setPublico("");
   };
-  
+
   return (
     <div className="w-full h-full">
       {/* Barra superior de navegación */}
@@ -499,7 +521,6 @@ const Principal = () => {
       <div className="w-full flex">
         {/* Columna izquierda: Filtros */}
         <div className="w-1/6 bg-gray-300 p-4 flex flex-col gap-6 sticky top-0 h-screen">
-
           {/* Componentes de filtros */}
           <Filtros
             mes={mes}
@@ -513,8 +534,11 @@ const Principal = () => {
             publico={publico}
             setPublico={setPublico}
           />
-          
-          <button onClick={limpiarFiltros} className="bg-red-500 text-white px-4 py-2 rounded w-3/4 mx-auto">
+
+          <button
+            onClick={limpiarFiltros}
+            className="bg-red-500 text-white px-4 py-2 rounded w-3/4 mx-auto"
+          >
             Limpiar filtros
           </button>
         </div>
@@ -522,7 +546,10 @@ const Principal = () => {
         {/* Contenedor de eventos filtrados */}
         <div className="w-4/5 px-8 py-6 flex flex-col gap-6">
           {Object.keys(eventosFiltrados).map((mesKey) => (
-            <div key={mesKey} className="flex flex-col items-center w-full gap-6">
+            <div
+              key={mesKey}
+              className="flex flex-col items-center w-full gap-6"
+            >
               {/* Título del mes */}
               <div className="w-full flex">
                 <h2 className="border-l-4 border-[#E5B300] font-sans text-3xl font-semibold pl-3">
@@ -561,14 +588,15 @@ const Principal = () => {
                         </h3>
                       </div>
                       <div className="flex items-center p-2 gap-2">
-                        {Array.isArray(evento.campus) && !evento.campus.includes("Plataforma Online") && (
-                          <button
-                            className="py-[2px] px-[18px] rounded-md text-white font-medium"
-                            style={{ backgroundColor: colores.colorCampus }}
-                          >
-                            {formatearCampus(evento.campus)}
-                          </button>
-                        )}
+                        {Array.isArray(evento.campus) &&
+                          !evento.campus.includes("Plataforma Online") && (
+                            <button
+                              className="py-[2px] px-[18px] rounded-md text-white font-medium"
+                              style={{ backgroundColor: colores.colorCampus }}
+                            >
+                              {formatearCampus(evento.campus)}
+                            </button>
+                          )}
                         {evento.campus && (
                           <button
                             className="py-[2px] px-[18px] rounded-md text-white font-medium"
@@ -580,7 +608,10 @@ const Principal = () => {
                       </div>
                       <div className="w-full h-full flex justify-end items-end">
                         <div className="py-4">
-                          <button onClick={() => handleVerDetalles(evento)} className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont rounded-sm">
+                          <button
+                            onClick={() => handleVerDetalles(evento)}
+                            className="bg-[#E5B300] px-6 py-2 text-white font-bold font-mont rounded-sm"
+                          >
                             Ver detalles
                           </button>
                         </div>
@@ -593,8 +624,11 @@ const Principal = () => {
           ))}
         </div>
       </div>
+      <div className="w-full">
+        <img src="footer.png" alt="" />
+      </div>
     </div>
   );
-}
+};
 
-export default Principal
+export default Principal;
