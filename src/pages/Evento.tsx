@@ -28,13 +28,13 @@ const Evento = () => {
     return <div>No se encontró información del evento.</div>;
   }
 
-	const [nombre, setNombre] = useState("");
-	const [correo, setCorreo] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [correo, setCorreo] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const handleInscribirse = () => {
-		setNombre("")
-		setCorreo("")
+    setNombre("");
+    setCorreo("");
     setShowModal(true);
   };
 
@@ -273,7 +273,9 @@ const Evento = () => {
               <h3 className="font-mont font-semibold text-lg mb-4 flex">
                 Inscríbete al evento para recibir un recordatorio:
               </h3>
-							<p className="text-pink-600 text-sm mb-4 flex">(*) campos obligatorios</p>
+              <p className="text-pink-600 text-sm mb-4 flex">
+                (*) campos obligatorios
+              </p>
 
               <div className="flex flex-col items-start mb-4">
                 <label
@@ -287,8 +289,8 @@ const Evento = () => {
                   id="nombre"
                   type="text"
                   placeholder="Nombre"
-									onChange={(e) => setNombre(e.target.value)}
-									value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  value={nombre}
                 />
               </div>
 
@@ -304,8 +306,8 @@ const Evento = () => {
                   id="correo"
                   type="email"
                   placeholder="Correo Electrónico"
-									onChange={(e) => setCorreo(e.target.value)}
-									value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
+                  value={correo}
                 />
               </div>
 
@@ -357,7 +359,7 @@ const Evento = () => {
                 Detalles del Evento
               </h2>
             </div>
-            <div className="w-full">
+            <div className="w-full text-start">
               <div className="flex w-[80%] px-2 py-4 items-center border-b-[1px] border-gray-400 border-opacity-25">
                 <div className="flex items-center">
                   <FontAwesomeIcon
@@ -533,7 +535,7 @@ const Evento = () => {
         </div>
       </div>
       <div className="w-full">
-        <img src="footer.png" alt="" />
+        <img className="w-full" src="footer.png" alt="" />
       </div>
     </div>
   );
