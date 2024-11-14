@@ -288,6 +288,7 @@ const Principal = () => {
   const [campus, setCampus] = useState<string>("");
   const [tematica, setTematica] = useState<string>("");
   const [publico, setPublico] = useState<string>("");
+  const [busqueda, setBusqueda] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -308,8 +309,15 @@ const Principal = () => {
     
     const mesesFiltrados: EventosPorMes = {};
 
+    const eliminarTildes = (texto: string) => {
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
     Object.keys(eventosPorMes).forEach((mesKey) => {
       const eventosFiltrados = eventosPorMes[mesKey].filter((evento) => {
+        const tituloNormalizado = eliminarTildes(evento.titulo.toLowerCase());
+        const busquedaNormalizada = eliminarTildes(busqueda.toLowerCase());
+
         return (
           (mes ? mesKey === mes : true) &&
           (modalidad ? evento.modalidad === modalidad : true) &&
@@ -319,7 +327,8 @@ const Principal = () => {
             ? evento.campus.includes(campus)
             : true) &&
           (tematica ? evento.tematica === tematica : true) &&
-          (publico ? evento.publico === publico : true)
+          (publico ? evento.publico === publico : true) &&
+          (busqueda ? tituloNormalizado.includes(busquedaNormalizada) : true)
         );
       });
 
@@ -564,6 +573,8 @@ const Principal = () => {
             setTematica={setTematica}
             publico={publico}
             setPublico={setPublico}
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
           />
 
           <button
