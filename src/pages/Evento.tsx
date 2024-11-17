@@ -13,6 +13,22 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+// redes sociales
+import {
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  EmailShareButton,
+  WhatsappIcon,
+  LinkedinIcon,
+  FacebookIcon,
+  TwitterIcon,
+  TelegramIcon,
+  EmailIcon,
+} from "react-share";
+
 const formatearCampus = (campusList: string[]) => {
   if (campusList.length === 1) return campusList[0];
   const campusListCopy = [...campusList];
@@ -41,6 +57,8 @@ const Evento = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const shareUrl = "https://usm.cl/eventos/";
 
   return (
     <div className="w-full h-full">
@@ -343,6 +361,65 @@ const Evento = () => {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          <div className="w-full flex flex-col mt-8 pl-[60px] pr-[60px]">
+            <div className="flex justify-end">
+              <div className="text-left">
+                <h3 className="font-mont font-semibold text-lg mb-4 text-[20px]">
+                  Comparte este evento!
+                </h3>
+              </div>
+            </div>
+            <div className="flex justify-end gap-4">
+              <LinkedinShareButton
+                url={shareUrl}
+                title={evento.titulo}
+                summary="No te pierdas este evento organizado por la Universidad Técnica Federico Santa María."
+                source="USM"
+              >
+                <LinkedinIcon size={40} round />
+              </LinkedinShareButton>
+
+              <EmailShareButton
+                url={shareUrl}
+                subject={`Mira este evento: ${evento.titulo}`}
+                body={`Te invito a participar en este evento organizado por la Universidad Técnica Federico Santa María. Puedes ver más detalles aquí: ${shareUrl}`}
+              >
+                <EmailIcon size={40} round />
+              </EmailShareButton>
+
+              <TwitterShareButton
+                url={shareUrl}
+                title={`Mira este evento: ${evento.titulo}`}
+                hashtags={["USM", "Eventos"]}
+              >
+                <TwitterIcon size={40} round />
+              </TwitterShareButton>
+
+              <FacebookShareButton
+                url={shareUrl}
+                title={`Mira este evento: ${evento.titulo}`}
+                hashtag="#USM"
+              >
+                <FacebookIcon size={40} round />
+              </FacebookShareButton>
+
+              <WhatsappShareButton
+                url={shareUrl}
+                title={`Mira este evento: ${evento.titulo}`}
+                separator=" - "
+              >
+                <WhatsappIcon size={40} round />
+              </WhatsappShareButton>
+
+              <TelegramShareButton
+                url={shareUrl}
+                title={`Mira este evento: ${evento.titulo}`}
+              >
+                <TelegramIcon size={40} round />
+              </TelegramShareButton>
             </div>
           </div>
         </div>
