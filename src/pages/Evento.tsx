@@ -430,7 +430,7 @@ const Evento = () => {
             src={evento.imagen}
             alt=""
           />
-          <div className="flex flex-col w-[80%] pl-12 gap-6 mt-72">
+          <div className="flex flex-col w-[80%] pl-12 gap-6 mt-64">
             <div className="w-full">
               <h2 className="text-start font-mont font-bold text-2xl text-stone-700 border-l-4 border-[#E5B300] pl-4">
                 Detalles del Evento
