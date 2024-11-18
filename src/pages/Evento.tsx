@@ -365,7 +365,7 @@ const Evento = () => {
           </div>
 
           <div className="w-full flex flex-col pl-[60px] pr-[60px]">
-            <div className="flex justify-end">
+            <div className="flex justify-end mr-28">
               <div className="text-left">
                 <h3 className="font-mont font-semibold text-lg mb-4 text-[20px]">
                   Comparte este evento!
