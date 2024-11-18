@@ -268,7 +268,7 @@ const Evento = () => {
       </div>
 
       <div className="w-full min-h-[60vh] flex mx-10">
-        <div className="w-9/12 h-full flex flex-col gap-8">
+        <div className="w-9/12 h-full flex flex-col gap-2">
           <ul className="w-full flex gap-1 py-[25px] pl-[45px] font-mont text-[14px]">
             <li className="text-[#005E90] border-l-4 border-[#005E90] pl-2">
               Inicio
@@ -282,11 +282,11 @@ const Evento = () => {
             <li>»</li>
             <li className="text-stone-700 font-bold">{evento.titulo}</li>
           </ul>
-          <div className="w-full h-full pl-[60px] flex flex-col font-mont text-[20px] text-[#3B424C] gap-4">
+          <div className="w-full h-full pl-[60px] flex flex-col font-mont text-[20px] text-[#3B424C] gap-2">
             <p className="text-start">{evento.descripcion1}</p>
             <p className="text-start">{evento.descripcion2}</p>
           </div>
-          <div className="w-full flex justify-center mt-10 text-[20px]">
+          <div className="w-full flex justify-center text-[20px]">
             <div className="w-1/2 p-6 rounded-lg ">
               <h3 className="font-mont font-semibold text-lg mb-4 flex text-[20px]">
                 Inscríbete al evento para recibir un recordatorio:
@@ -364,7 +364,7 @@ const Evento = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-col mt-8 pl-[60px] pr-[60px]">
+          <div className="w-full flex flex-col pl-[60px] pr-[60px]">
             <div className="flex justify-end">
               <div className="text-left">
                 <h3 className="font-mont font-semibold text-lg mb-4 text-[20px]">
@@ -424,13 +424,13 @@ const Evento = () => {
           </div>
         </div>
 
-        <div className="w-3/12 flex items-end relative">
+        <div className="w-4/12 flex items-end relative">
           <img
             className="absolute p- w-72 -top-12 left-12 rounded-xl shadow-sm shadow-black"
             src={evento.imagen}
             alt=""
           />
-          <div className="flex flex-col w-[80%] pl-12 gap-6 mt-64">
+          <div className="flex flex-col w-[90%] pl-12 gap-1 mt-64">
             <div className="w-full">
               <h2 className="text-start font-mont font-bold text-2xl text-stone-700 border-l-4 border-[#E5B300] pl-4">
                 Detalles del Evento
@@ -611,7 +611,7 @@ const Evento = () => {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full mt-5">
         <img className="w-full" src="footer.png" alt="" />
       </div>
     </div>
