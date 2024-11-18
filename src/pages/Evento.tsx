@@ -267,7 +267,7 @@ const Evento = () => {
         </div>
       </div>
 
-      <div className="w-full min-h-[60vh] flex">
+      <div className="w-full min-h-[60vh] flex mx-10">
         <div className="w-9/12 h-full flex flex-col gap-8">
           <ul className="w-full flex gap-1 py-[25px] pl-[45px] font-mont text-[14px]">
             <li className="text-[#005E90] border-l-4 border-[#005E90] pl-2">
